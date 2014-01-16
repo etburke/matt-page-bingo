@@ -80,6 +80,8 @@ function checkForBingo() {
         });
     });
 
+    if (bingo) return true;
+
     // Check columns
     var curCol = 0;
 
@@ -97,6 +99,32 @@ function checkForBingo() {
                 bingo = true;
                 break;
             }
+        }
+    }
+
+    if (bingo) return true;
+
+    // Check top to bottom diagonal.
+    bingo = true;
+    for (var col=0; col<5; col++) {
+        var cellId = '#cell' + parseInt(col*6, 10);
+
+        if (!$(cellId).hasClass('selected')) {
+            bingo = false;
+            break;
+        }
+    }
+
+    if (bingo) return true;
+
+    // Check bottom to top diagonal.
+    bingo = true;
+    for (var col=0; col<5; col++) {
+        var cellId = '#cell' + parseInt((col+1) * 4, 10);
+
+        if (!$(cellId).hasClass('selected')) {
+            bingo = false;
+            break;
         }
     }
 
