@@ -1,0 +1,80 @@
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+    background-color:#efefef;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table {
+    margin:0;
+    padding:0;
+    width:100%;
+    margin:auto;
+}
+
+td {
+    margin:0;
+    padding:0;
+    text-align: center;
+    vertical-align: middle;
+    background-color:white;
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+tr {
+    margin:0;
+    padding:0;
+}
+
+img.stamp {
+    width:auto;
+    height:auto;
+    visibility: hidden;
+    position:absolute;
+    margin:auto;
+    left:0;
+    top:0;
+}
+
+.term {
+    font-family: 'courier new';
+    font-size:20px;
+    font-weight: bold;
+    text-shadow:1px 3px 1px rgba(0,0,0,0.25);
+}
+
+.term.down {
+    text-shadow:none;
+}
+
+.winner {
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color:pink;
+    color:yellow;
+    font-size:50px;
+    left:0;
+    top:0;
+    z-index:100;
+    display:none;
+}
+
+.winner div {
+    position:relative;
+    top:40%;
+    text-align:center;
+    vertical-align: middle;
+    margin:auto;
+}
