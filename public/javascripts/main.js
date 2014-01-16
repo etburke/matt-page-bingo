@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    var gridSize = $('tr').length;
     function resizeAll() {
         var swidth = $(window).width();
         var sheight = $(window).height();
@@ -7,7 +8,8 @@ $(document).ready(function() {
         var biggest = Math.min(swidth, sheight);
 
         $('#board').css({width:biggest+'px', height:biggest+'px'});
-        var iwidth = (biggest + 4) / 5;
+        var gridSize = $('tr').length;
+        var iwidth = (biggest + gridSize-1) / gridSize;
         $('.stamp,td').css({width:iwidth+'px', height:iwidth+'px'});
     }
 
@@ -44,7 +46,8 @@ $(document).ready(function() {
     resizeAll();
     $(window).resize(resizeAll);
 
-});
+
+/////////
 
 function selectTerm(cellId) {
     var $cell = $('#'+cellId);
@@ -73,7 +76,7 @@ function checkForBingo() {
                 selectedCount++;
             }
 
-            if (selectedCount === 5) {
+            if (selectedCount === gridSize) {
                 bingo = true;
                 return;
             }
@@ -84,18 +87,17 @@ function checkForBingo() {
 
     // Check columns
     var curCol = 0;
-
-    for (var col=0; col < 5; col++) {
+    for (var col=0; col < gridSize; col++) {
         selectedCount = 0;
 
-        for (var row=0; row < 5; row++) {
-            var cellId = "#cell"+((col*5)+row);
+        for (var row=0; row < gridSize; row++) {
+            var cellId = "#cell"+((col*gridSize)+row);
 
             if ($(cellId).hasClass('selected')) {
                 selectedCount++;
             }
 
-            if (selectedCount === 5) {
+            if (selectedCount === gridSize) {
                 bingo = true;
                 break;
             }
@@ -106,8 +108,8 @@ function checkForBingo() {
 
     // Check top to bottom diagonal.
     bingo = true;
-    for (var col=0; col<5; col++) {
-        var cellId = '#cell' + parseInt(col*6, 10);
+    for (var col=0; col<gridSize; col++) {
+        var cellId = '#cell' + parseInt(col*(gridSize+1), 10);
 
         if (!$(cellId).hasClass('selected')) {
             bingo = false;
@@ -119,8 +121,8 @@ function checkForBingo() {
 
     // Check bottom to top diagonal.
     bingo = true;
-    for (var col=0; col<5; col++) {
-        var cellId = '#cell' + parseInt((col+1) * 4, 10);
+    for (var col=0; col<gridSize; col++) {
+        var cellId = '#cell' + parseInt((col+1) * (gridSize-1), 10);
 
         if (!$(cellId).hasClass('selected')) {
             bingo = false;
@@ -133,4 +135,7 @@ function checkForBingo() {
 
 
 
+
+
+});
 

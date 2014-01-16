@@ -7,12 +7,17 @@ var fs = require('fs');
 exports.index = function(req, res) {
     var arr = fs.readFileSync(__dirname + "/../data.json");
 
-    var templateName = (req.query.t === 2) ? 'index2' : 'index';
+    var templateName = (!req.query.t ? 'index' : ('index'+req.query.t));
     res.render(templateName, { bingo: JSON.stringify(shuffle(JSON.parse(arr.toString("utf-8")).bingo)) });
 };
 
 exports.index2 = function(req, res) {
-    req.query.t = 2;
+    req.query.t = '2';
+    exports.index(req, res);
+};
+
+exports.index3x3 = function(req, res) {
+    req.query.t = '3x3';
     exports.index(req, res);
 };
 
