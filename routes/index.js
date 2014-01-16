@@ -7,7 +7,13 @@ var fs = require('fs');
 exports.index = function(req, res) {
     var arr = fs.readFileSync(__dirname + "/../data.json");
 
-    res.render('index', { bingo: JSON.stringify(shuffle(JSON.parse(arr.toString("utf-8")).bingo)) });
+    var templateName = (req.query.t === 2) ? 'index2' : 'index';
+    res.render(templateName, { bingo: JSON.stringify(shuffle(JSON.parse(arr.toString("utf-8")).bingo)) });
+};
+
+exports.index2 = function(req, res) {
+    req.query.t = 2;
+    exports.index(req, res);
 };
 
 function shuffle(o) {
