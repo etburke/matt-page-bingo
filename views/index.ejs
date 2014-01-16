@@ -41,10 +41,22 @@
     .container {
         margin-top: 5px;
         width: 500px;
+        position: relative;
+    }
+    .bubble {
+        background-image: url('./images/bingo.png');
+        z-index: 1000;
+        position: absolute;
+        top: 197px;
+        left: 100px;
+        width: 150px;
+        height: 150px;
+        display: none;
     }
   </style>
   <body ln="en">
     <div class="container" id="container">
+        <div class="bubble"></div>
     </div>
     <script>
         var data = [];
@@ -118,7 +130,7 @@
             }
 
             if (checkForBingo()) {
-                console.log("bingo")
+                $(".bubble").fadeIn(100);
             }
         }
 
