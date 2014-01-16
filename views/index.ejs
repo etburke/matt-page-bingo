@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Matt Page Bingo!</title>
+    <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css' />
+  </head>
+  <style type="text/css">
+    h1 {
+        text-align: center;
+    }
+    .tile {
+        margin-left: 5px;
+        height: 150px;
+        width: 150px;
+        display: inline-block;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        top: 50%;
+        background-color: rgba(130,130,130,0.8);
+    }
+    .tileText {
+        position: absolute;
+        margin: 53px 0 0 0;
+        width: 150px;
+        /*height: 150px;*/
+        padding: 5px;
+        vertical-align: middle;
+        text-align: center;
+        color: white;
+        /*line-height: 140px;*/
+    }
+    .bingo {
+        background-color: rgba(196,57,57,0.8);
+    }
+    .container {
+        width: 805px;
+    }
+  </style>
+  <body ln="en">
+    <div class="container" id="container">
+        <h1>BINGO!</h1>
+    </div>
+    <script>
+        var data = [];
+        // localStorage.clear();
+        if (localStorage.bingo) {
+            data = JSON.parse(localStorage.bingo);
+        }
+        else {
+            data = <%- bingo %>;
+            localStorage.bingo = JSON.stringify(data);
+        }
+
+        // var c = document.getElementById("myCanvas");
+        var rows = [1, 2, 3, 4, 5];
+        var columns = [1, 2, 3, 4, 5];
+        var tileSize = 150;
+        var tilePadding = 5;
+        var x = tilePadding;
+        var y = tilePadding;
+        var dataIndex = 0;
+
+        for (var i = rows.length - 1; i >= 0; i--) {
+            for (var j = columns.length - 1; j >= 0; j--) {
+                x = (columns[j] * tilePadding) + (columns[j] - 1) * tileSize;
+                y = (rows[i] * tilePadding) + (rows[i] - 1) * tileSize;
+
+                var key = (columns[j].toString() + rows[i].toString());
+                var text = "";
+                if (key === "33") {
+                    text = "WILD";
+                }
+                else {
+                    text = data[dataIndex];
+                }
+                dataIndex++;
+                addElement("tile_" + key, text);
+            }
+        }
+
+        function addElement (id, text) {
+          var newDiv = document.createElement("div");
+          newDiv.setAttribute("id", id);
+          newDiv.setAttribute("class", "tile");
+          newDiv.onclick = bingo;
+
+          var newP = document.createElement("p");
+          newP.setAttribute("class", "tileText");
+          // newP.setAttribute("class", "lead");
+          newP.innerHTML = text;
+
+          newDiv.appendChild(newP);
+
+          document.getElementById("container").appendChild(newDiv);
+        }
+
+        function bingo () {
+            if (this.getAttribute("class").indexOf("bingo") === -1) {
+                this.setAttribute("class", "bingo tile");
+            }
+            else {
+                this.setAttribute("class", "tile");
+            }
+        }
+    </script>
+  </body>
+</html>
