@@ -33,13 +33,17 @@
     .bingo {
         background-color: rgba(196,57,57,0.8);
     }
+    .mattPage {
+        background-image: url('./images/ITS-MATT-PAGE-BETCH.png');
+        z-index: 1000;
+    }
     .container {
+        margin-top: 5px;
         width: 805px;
     }
   </style>
   <body ln="en">
     <div class="container" id="container">
-        <h1>BINGO!</h1>
     </div>
     <script>
         var data = [];
@@ -68,21 +72,25 @@
 
                 var key = (columns[j].toString() + rows[i].toString());
                 var text = "";
+                var cssClass = "";
+
                 if (key === "33") {
                     text = "WILD";
+                    cssClass = "bingo mattPage";
                 }
                 else {
                     text = data[dataIndex];
                 }
+
                 dataIndex++;
-                addElement("tile_" + key, text);
+                addElement("tile_" + key, text, cssClass);
             }
         }
 
-        function addElement (id, text) {
+        function addElement (id, text, cssClass) {
           var newDiv = document.createElement("div");
           newDiv.setAttribute("id", id);
-          newDiv.setAttribute("class", "tile");
+          newDiv.setAttribute("class", "tile " + cssClass);
           newDiv.onclick = bingo;
 
           var newP = document.createElement("p");
@@ -97,7 +105,7 @@
 
         function bingo () {
             if (this.getAttribute("class").indexOf("bingo") === -1) {
-                this.setAttribute("class", "bingo tile");
+                this.setAttribute("class", "bingo tile mattPage");
             }
             else {
                 this.setAttribute("class", "tile");
