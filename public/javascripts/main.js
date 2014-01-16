@@ -134,8 +134,5 @@ function checkForBingo() {
 }
 
 
-
-
-
 });
 
