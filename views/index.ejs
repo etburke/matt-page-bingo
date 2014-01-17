@@ -51,8 +51,43 @@
         left: 100px;
         width: 150px;
         height: 150px;
-        display: none;
+        opacity:0.0;
+        -webkit-transition:opacity 350ms;
     }
+    .shown {
+        opacity:1.0;
+        -webkit-animation: bounce2 250ms ease-out;
+    }
+
+    @-webkit-keyframes bounce {
+      0% {
+        -webkit-transform:scale(0.5, 0.5);
+      }
+      33% {
+        -webkit-transform:scale(1.2, 1.2);
+      }
+      66% {
+        -webkit-transform:scale(0.9, 0.9);
+      }
+      82% {
+        -webkit-transform:scale(1.1, 1.1);
+      }
+      90% {
+        -webkit-transform:scale(0.95, 0.95);
+      }
+      100% {
+        -webkit-transform:scale(1.0, 1.0);
+      }
+    }
+
+@-webkit-keyframes bounce2 {
+    0%{ -webkit-transform:scale(0);}
+    50%{ -webkit-transform:scale(1.3);}
+    75%{ -webkit-transform:scale(0.9);}
+    100%{ -webkit-transform:scale(1);}
+}    
+
+
   </style>
   <body ln="en">
     <div class="container" id="container">
@@ -130,7 +165,12 @@
             }
 
             if (checkForBingo()) {
-                $(".bubble").fadeIn(100);
+                var boing = new Audio("/sounds/boing.wav");
+                boing.play();
+                $(".bubble").addClass("shown");
+            }
+            else {
+                $('.bubble').removeClass("shown");
             }
         }
 
