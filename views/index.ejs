@@ -106,8 +106,9 @@
     <script>
         var data = [];
         var boing = new Audio("/sounds/boing.wav");
-        boing.load();
-        // localStorage.clear();
+        boing.volume = 0.0;
+        boing.play();
+
         if (localStorage.bingo) {
             data = JSON.parse(localStorage.bingo);
         }
