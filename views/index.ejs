@@ -101,11 +101,12 @@
     <div class="container" id="container">
         <div class="bubble"></div>
     </div>
-        <button type="button" onclick="localStorage.clear(); alert('resetted');" class="btn">Reset</button>
+        <button type="button" onclick="localStorage.clear(); alert('reset');" class="btn">Reset</button>
 
     <script>
         var data = [];
         var boing = new Audio("/sounds/boing.wav");
+        boing.load();
         // localStorage.clear();
         if (localStorage.bingo) {
             data = JSON.parse(localStorage.bingo);
