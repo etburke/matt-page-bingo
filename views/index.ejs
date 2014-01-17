@@ -4,6 +4,7 @@
     <title>Matt Page Bingo!</title>
     <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css' />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <meta name="viewport" content="width=500">
 </head>
   <style type="text/css">
     h1 {
@@ -53,8 +54,10 @@
         height: 150px;
         opacity:0.0;
         -webkit-transition:opacity 350ms;
+        display:none;
     }
     .shown {
+        display:block;
         opacity:1.0;
         -webkit-animation: bounce2 250ms ease-out;
     }
