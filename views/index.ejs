@@ -45,7 +45,7 @@
         position: relative;
     }
     .bubble {
-        background-image: url('./images/bingo.png');
+        background-image: url('/images/bingo.png');
         z-index: 1000;
         position: absolute;
         top: 197px;
@@ -83,21 +83,29 @@
       }
     }
 
-@-webkit-keyframes bounce2 {
-    0%{ -webkit-transform:scale(0);}
-    50%{ -webkit-transform:scale(1.3);}
-    75%{ -webkit-transform:scale(0.9);}
-    100%{ -webkit-transform:scale(1);}
-}    
+    @-webkit-keyframes bounce2 {
+        0%{ -webkit-transform:scale(0);}
+        50%{ -webkit-transform:scale(1.3);}
+        75%{ -webkit-transform:scale(0.9);}
+        100%{ -webkit-transform:scale(1);}
+    }    
 
+    button {
+        position:absolute;
+        bottom:0;
+        opacity:0;
+    }
 
   </style>
   <body ln="en">
     <div class="container" id="container">
         <div class="bubble"></div>
     </div>
+        <button type="button" onclick="localStorage.clear(); alert('resetted');" class="btn">Reset</button>
+
     <script>
         var data = [];
+        var boing = new Audio("/sounds/boing.wav");
         // localStorage.clear();
         if (localStorage.bingo) {
             data = JSON.parse(localStorage.bingo);
@@ -116,6 +124,7 @@
         var x = tilePadding;
         var y = tilePadding;
         var dataIndex = 0;
+        var offset = 0;
 
         for (var i = rows.length - 1; i >= 0; i--) {
             for (var j = columns.length - 1; j >= 0; j--) {
@@ -129,9 +138,10 @@
                 if (key === "22") {
                     text = "WILD";
                     cssClass = "bingo mattPage";
+                    offset = 1;
                 }
                 else {
-                    text = data[dataIndex];
+                    text = data[dataIndex - offset];
                 }
 
                 dataIndex++;
@@ -168,7 +178,6 @@
             }
 
             if (checkForBingo()) {
-                var boing = new Audio("/sounds/boing.wav");
                 boing.play();
                 $(".bubble").addClass("shown");
             }
